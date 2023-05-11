@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:36:54 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/11 14:52:41 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:20:28 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,10 @@ void	sleepies(t_data *d, int i)
 {
 	if (d->is_everyone_alive == true)
 	{
-		if (d->philosophers[i].is_eating == false
-				&& d->philosophers[i].is_dead == false)
-		{
-			d->philosophers[i].is_sleeping = true;
-			print(3, i);
-			smart_sleepies(d->time_sleep, i);
-			d->philosophers[i].is_sleeping = false;
-		}
+		d->philosophers[i].is_sleeping = true;
+		print(3, i);
+		smart_sleepies(d->time_sleep, i);
+		d->philosophers[i].is_sleeping = false;
 	}
 }
 

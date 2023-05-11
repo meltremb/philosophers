@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:09:24 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/11 15:06:25 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:21:05 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_data	*get_data(void);
 void	*print(int type, int position);
 int		exit_thread(char *message);
 void	smart_sleepies(int time, int position);
-int		am_i_dead(int position);
+int		am_i_dead(int i);
 void	free_all(void);
 
 #endif

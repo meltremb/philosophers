@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:10:07 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/11 15:06:24 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:23:17 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	philosophers(t_data *d)
 int	main(int argc, char **argv)
 {
 	t_data	*d;
-	int	i;
+	int		i;
 
 	if (argc == 5 || argc == 6)
 	{

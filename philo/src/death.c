@@ -6,23 +6,23 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:16:55 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/11 14:26:10 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:21:26 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../include/philosophers.h"
 
-int	am_i_dead(int position)
+int	am_i_dead(int i)
 {
-	t_data *d;
+	t_data	*d;
 
 	d = get_data();
-	if (get_timestamp() - d->philosophers[position].time_last_ate >= d->time_die)
+	if (get_timestamp() - d->philosophers[i].time_last_ate >= d->time_die)
 	{
-		die(d, position);
+		die(d, i);
 		return (1);
 	}
-	return(0);
+	return (0);
 }
 
 void	smart_sleepies(int time, int position)

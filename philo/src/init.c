@@ -6,16 +6,18 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:34:09 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/11 15:22:32 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:10:01 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../include/philosophers.h"
 
-void	init(int argc, char **argv, t_data *d)
+void	init(int argc, char **argv)
 {
-	int	i;
+	int		i;
+	t_data	*d;
 
+	d = get_data();
 	d->nb_philosophers = ft_atoi(argv[1]);
 	d->philosophers = ft_calloc((d->nb_philosophers + 2),
 			sizeof(t_philosopher));
@@ -29,8 +31,12 @@ void	init(int argc, char **argv, t_data *d)
 	if (argc == 6)
 		d->max_times_eat = ft_atoi(argv[5]);
 	i = 0;
-	while (i++ <= d->nb_philosophers)
+	while (++i <= d->nb_philosophers)
+	{
+		if (argc == 6)
+			d->philosophers[i].times_eaten = 0;
 		pthread_mutex_init(&d->forks[i], NULL);
+	}
 }
 
 int	check_args(int argc, char **argv)

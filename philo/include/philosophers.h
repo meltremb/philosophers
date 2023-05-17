@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:09:24 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/11 15:21:05 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:09:40 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ typedef struct s_data
 	int				max_times_eat;
 }						t_data;
 
-void	init(int argc, char **argv, t_data *d);
+void	init(int argc, char **argv);
 int		check_args(int argc, char **argv);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_atoi(const char *str);
 int		ft_str_isdigit(char *str);
 char	**ft_split(char const *s, char c);
 int		get_timestamp(void);
-void	eat(t_data *d, int i);
-void	sleepies(t_data *d, int i);
-void	think(t_data *d, int i);
-void	die(t_data *d, int i);
+void	eat(int i);
+void	sleepies(int i);
+void	think(int i);
+void	die(int i);
 t_data	*get_data(void);
 void	*print(int type, int position);
 int		exit_thread(char *message);

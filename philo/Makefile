@@ -6,7 +6,7 @@
 #    By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/25 13:40:24 by meltremb          #+#    #+#              #
-#    Updated: 2023/05/11 15:07:25 by meltremb         ###   ########.fr        #
+#    Updated: 2023/05/17 13:15:14 by meltremb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,9 +67,10 @@ $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c
 		-@ $(HIDE)mkdir -p $(OBJDIR)
 		-@ $(HIDE)$(CC) $(CFLAGS) -c $< -o $@
 
-# Removes objects
+# Removes objects and object directory
 clean:
 	$(HIDE)$(RM) $(OBJS)
+	$(HIDE)$(RM) $(OBJDIR)
 
 # Removes objects and executables
 fclean: clean

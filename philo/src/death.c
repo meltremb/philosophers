@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:16:55 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/30 13:44:48 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:40:50 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	am_i_dead(int i)
 	d = get_data();
 	if (get_timestamp() - d->philo[i].time_last_ate >= d->time_die)
 	{
+		pthread_mutex_lock(&d->print);
+		pthread_mutex_unlock(&d->print);
 		die(i);
 		return (1);
 	}

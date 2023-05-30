@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:36:54 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/30 13:44:45 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:04:11 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	eat(int i)
 	if (d->philo[i].is_thinking == true)
 		d->philo[i].is_thinking = false;
 	d->philo[i].is_eating = true;
+	am_i_dead(i);
 	print(2, i);
 	d->philo[i].time_last_ate = get_timestamp();
 	smart_sleepies(d->time_eat, i);
@@ -60,7 +61,7 @@ void	think(int i)
 	d = get_data();
 	if (d->is_everyone_alive == true)
 	{
-		if (d->philo[i].is_dead == false)
+		if (d->philo[i].is_dead == false && d->philo[i].is_thinking == false)
 		{
 			d->philo[i].is_thinking = true;
 			print(4, i);

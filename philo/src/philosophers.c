@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:10:07 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/30 13:43:51 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:02:57 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	*do_stuff_one(void *arg)
 
 	d = get_data();
 	position = *(int *)arg;
+	pthread_mutex_lock(&d->print);
+	pthread_mutex_unlock(&d->print);
 	pthread_mutex_lock(&d->forks[position]);
 	print(1, position);
 	while (am_i_dead(position) == 0)
@@ -41,7 +43,7 @@ void	*do_stuff(void *arg)
 	pthread_mutex_unlock(&d->print);
 	if (position % 2 == 0)
 		usleep(100);
-	while (am_i_dead(position) == 0)
+	while (am_i_dead(position) != 1)
 	{
 		if (d->is_everyone_alive == false)
 			break ;
@@ -49,7 +51,8 @@ void	*do_stuff(void *arg)
 		if (d->philo[position].times_eaten == d->max_times_eat)
 			break ;
 		sleepies(position);
-		think(position);
+		while (am_i_dead(position) != 1)
+			think(position);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:36:23 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/11 15:23:27 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:45:01 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	free_all(void)
 	pthread_mutex_destroy(&d->print);
 	pthread_mutex_destroy(&d->end);
 	free(d->forks);
-	free(d->philosophers);
+	free(d->philo);
 	free(d->start_time);
 	free(d);
 }

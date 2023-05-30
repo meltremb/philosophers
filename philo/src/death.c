@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:16:55 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/17 12:11:29 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:44:48 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	am_i_dead(int i)
 	t_data	*d;
 
 	d = get_data();
-	if (get_timestamp() - d->philosophers[i].time_last_ate >= d->time_die)
+	if (get_timestamp() - d->philo[i].time_last_ate >= d->time_die)
 	{
 		die(i);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:34:09 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/17 12:10:01 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:44:01 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init(int argc, char **argv)
 
 	d = get_data();
 	d->nb_philosophers = ft_atoi(argv[1]);
-	d->philosophers = ft_calloc((d->nb_philosophers + 2),
+	d->philo = ft_calloc((d->nb_philosophers + 2),
 			sizeof(t_philosopher));
 	d->forks = ft_calloc((d->nb_philosophers + 1), sizeof(pthread_mutex_t));
 	d->start_time = ft_calloc(1, sizeof(struct timeval));
@@ -34,7 +34,7 @@ void	init(int argc, char **argv)
 	while (++i <= d->nb_philosophers)
 	{
 		if (argc == 6)
-			d->philosophers[i].times_eaten = 0;
+			d->philo[i].times_eaten = 0;
 		pthread_mutex_init(&d->forks[i], NULL);
 	}
 }

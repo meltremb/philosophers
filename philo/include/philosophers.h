@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:09:24 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/17 12:09:40 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:43:28 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_philosopher
 
 typedef struct s_data
 {
-	t_philosopher	*philosophers;
+	t_philosopher	*philo;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
 	pthread_mutex_t	end;

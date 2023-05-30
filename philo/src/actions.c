@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:36:54 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/17 13:08:22 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:44:45 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	eat(int i)
 	else
 		pthread_mutex_lock(&d->forks[i - 1]);
 	print(1, i);
-	if (d->philosophers[i].is_thinking == true)
-		d->philosophers[i].is_thinking = false;
-	d->philosophers[i].is_eating = true;
+	if (d->philo[i].is_thinking == true)
+		d->philo[i].is_thinking = false;
+	d->philo[i].is_eating = true;
 	print(2, i);
-	d->philosophers[i].time_last_ate = get_timestamp();
+	d->philo[i].time_last_ate = get_timestamp();
 	smart_sleepies(d->time_eat, i);
-	d->philosophers[i].times_eaten += 1;
-	d->philosophers[i].is_eating = false;
+	d->philo[i].times_eaten += 1;
+	d->philo[i].is_eating = false;
 	pthread_mutex_unlock(&d->forks[i]);
 	if (i == 1)
 		pthread_mutex_unlock(&d->forks[d->nb_philosophers]);
@@ -46,10 +46,10 @@ void	sleepies(int i)
 	d = get_data();
 	if (d->is_everyone_alive == true)
 	{
-		d->philosophers[i].is_sleeping = true;
+		d->philo[i].is_sleeping = true;
 		print(3, i);
 		smart_sleepies(d->time_sleep, i);
-		d->philosophers[i].is_sleeping = false;
+		d->philo[i].is_sleeping = false;
 	}
 }
 
@@ -60,9 +60,9 @@ void	think(int i)
 	d = get_data();
 	if (d->is_everyone_alive == true)
 	{
-		if (d->philosophers[i].is_dead == false)
+		if (d->philo[i].is_dead == false)
 		{
-			d->philosophers[i].is_thinking = true;
+			d->philo[i].is_thinking = true;
 			print(4, i);
 		}
 	}
@@ -73,12 +73,12 @@ void	die(int i)
 	t_data	*d;
 
 	d = get_data();
-	d->philosophers[i].is_dead = true;
+	d->philo[i].is_dead = true;
 	print(5, i);
 	pthread_mutex_lock(&d->end);
 	d->is_everyone_alive = false;
 	pthread_mutex_unlock(&d->end);
-	d->philosophers[i].is_eating = false;
-	d->philosophers[i].is_sleeping = false;
-	d->philosophers[i].is_thinking = false;
+	d->philo[i].is_eating = false;
+	d->philo[i].is_sleeping = false;
+	d->philo[i].is_thinking = false;
 }

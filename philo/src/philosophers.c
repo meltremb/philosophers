@@ -6,11 +6,29 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:10:07 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/17 13:15:13 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:43:51 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../include/philosophers.h"
+
+void	*do_stuff_one(void *arg)
+{
+	int		position;
+	t_data	*d;
+
+	d = get_data();
+	position = *(int *)arg;
+	pthread_mutex_lock(&d->forks[position]);
+	print(1, position);
+	while (am_i_dead(position) == 0)
+	{
+		if (d->is_everyone_alive == false)
+			break ;
+		am_i_dead(position);
+	}
+	return (NULL);
+}
 
 void	*do_stuff(void *arg)
 {
@@ -28,7 +46,7 @@ void	*do_stuff(void *arg)
 		if (d->is_everyone_alive == false)
 			break ;
 		eat(position);
-		if (d->philosophers[position].times_eaten == d->max_times_eat)
+		if (d->philo[position].times_eaten == d->max_times_eat)
 			break ;
 		sleepies(position);
 		think(position);
@@ -46,12 +64,21 @@ void	philosophers(void)
 		exit_thread("Error creating mutex");
 	gettimeofday(d->start_time, NULL);
 	pthread_mutex_lock(&d->print);
-	i = 0;
-	while (++i <= d->nb_philosophers)
+	if (d->nb_philosophers == 1)
 	{
-		if (pthread_create(&d->philosophers[i].thread_id, NULL, &do_stuff, &i))
+		i = 1;
+		if (pthread_create(&d->philo[i].thread_id, NULL, &do_stuff_one, &i))
 			exit_thread("Error creating thread");
-		usleep(100);
+	}
+	else
+	{
+		i = 0;
+		while (++i <= d->nb_philosophers)
+		{
+			if (pthread_create(&d->philo[i].thread_id, NULL, &do_stuff, &i))
+				exit_thread("Error creating thread");
+			usleep(100);
+		}
 	}
 	pthread_mutex_unlock(&d->print);
 }
@@ -70,8 +97,8 @@ int	main(int argc, char **argv)
 		i = 0;
 		d = get_data();
 		while (++i <= d->nb_philosophers)
-			if (d->philosophers[i].thread_id)
-				pthread_join(d->philosophers[i].thread_id, NULL);
+			if (d->philo[i].thread_id)
+				pthread_join(d->philo[i].thread_id, NULL);
 		free_all();
 	}
 	return (0);

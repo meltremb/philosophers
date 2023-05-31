@@ -6,28 +6,36 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:36:54 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/30 16:04:11 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/31 09:03:54 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../include/philosophers.h"
+
+void	take_forks(int i)
+{
+	t_data	*d;
+
+	d = get_data();
+	pthread_mutex_lock(&d->forks[i]);
+	is_anyone_dead();
+	print(1, i);
+	if (i == 1)
+		pthread_mutex_lock(&d->forks[d->nb_philosophers]);
+	else
+		pthread_mutex_lock(&d->forks[i - 1]);
+	is_anyone_dead();
+	print(1, i);
+}
 
 void	eat(int i)
 {
 	t_data	*d;
 
 	d = get_data();
-	pthread_mutex_lock(&d->forks[i]);
-	print(1, i);
-	if (i == 1)
-		pthread_mutex_lock(&d->forks[d->nb_philosophers]);
-	else
-		pthread_mutex_lock(&d->forks[i - 1]);
-	print(1, i);
 	if (d->philo[i].is_thinking == true)
 		d->philo[i].is_thinking = false;
 	d->philo[i].is_eating = true;
-	am_i_dead(i);
 	print(2, i);
 	d->philo[i].time_last_ate = get_timestamp();
 	smart_sleepies(d->time_eat, i);

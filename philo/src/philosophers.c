@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:10:07 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/30 16:02:57 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/31 08:50:54 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void	*do_stuff(void *arg)
 	{
 		if (d->is_everyone_alive == false)
 			break ;
+		take_forks(position);
 		eat(position);
 		if (d->philo[position].times_eaten == d->max_times_eat)
 			break ;
 		sleepies(position);
-		while (am_i_dead(position) != 1)
-			think(position);
+		think(position);
 	}
 	return (NULL);
 }

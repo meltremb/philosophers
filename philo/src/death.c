@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:16:55 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/30 14:40:50 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/31 09:06:00 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ int	am_i_dead(int i)
 	return (0);
 }
 
+int	is_anyone_dead(void)
+{
+	int		i;
+	t_data	*d;
+
+	d = get_data();
+	i = 0;
+	while (++i <= d->nb_philosophers)
+	{
+		if (am_i_dead(i) == 1)
+			return (1);
+	}
+	return (0);
+}
+
 void	smart_sleepies(int time, int position)
 {
 	t_data	*d;
@@ -36,7 +51,7 @@ void	smart_sleepies(int time, int position)
 	initial_time = get_timestamp();
 	while (get_timestamp() - initial_time < time)
 	{
-		if (am_i_dead(position) == 1)
+		if (am_i_dead(position) == 1 || is_anyone_dead() == 1)
 			break ;
 		usleep(1000);
 	}

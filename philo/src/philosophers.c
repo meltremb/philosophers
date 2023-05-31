@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:10:07 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/31 11:34:58 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:46:19 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void	*do_stuff(void *arg)
 	position = *(int *)arg;
 	pthread_mutex_lock(&d->print);
 	pthread_mutex_unlock(&d->print);
-	if (position % 2 == 0
-		|| (position == d->nb_philosophers && position % 2 != 0))
+	if (position % 2 != 0)
 	{
 		think(position);
 		usleep(100);

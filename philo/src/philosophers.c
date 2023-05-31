@@ -6,7 +6,7 @@
 /*   By: meltremb <meltremb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 15:10:07 by meltremb          #+#    #+#             */
-/*   Updated: 2023/05/31 08:50:54 by meltremb         ###   ########.fr       */
+/*   Updated: 2023/05/31 11:34:58 by meltremb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	*do_stuff_one(void *arg)
 	pthread_mutex_lock(&d->print);
 	pthread_mutex_unlock(&d->print);
 	pthread_mutex_lock(&d->forks[position]);
+	think(position);
 	print(1, position);
 	while (am_i_dead(position) == 0)
 	{
@@ -41,8 +42,12 @@ void	*do_stuff(void *arg)
 	position = *(int *)arg;
 	pthread_mutex_lock(&d->print);
 	pthread_mutex_unlock(&d->print);
-	if (position % 2 == 0)
+	if (position % 2 == 0
+		|| (position == d->nb_philosophers && position % 2 != 0))
+	{
+		think(position);
 		usleep(100);
+	}
 	while (am_i_dead(position) != 1)
 	{
 		if (d->is_everyone_alive == false)
